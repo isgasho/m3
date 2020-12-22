@@ -150,7 +150,7 @@ genny-map-persist-fs:
 .PHONY: genny-map-storage-index-results
 genny-map-storage-index-results:
 	cd $(m3x_package_path) && make byteshashmap-gen             \
-		pkg=storage                                             \
+		pkg=index                                               \
 		value_type=doc.EncodedDocument                          \
 		target_package=$(m3db_package)/src/dbnode/storage/index \
 		rename_nogen_key=true                                   \

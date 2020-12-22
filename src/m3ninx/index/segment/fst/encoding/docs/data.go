@@ -129,6 +129,30 @@ func (r *DataReader) Read(offset uint64) (doc.Document, error) {
 	return d, nil
 }
 
+// EncodedDataReader is a reader for the data file for encoded documents.
+type EncodedDataReader struct {
+	data []byte
+}
+
+// NewEncodedDataReader returns a new EncodedDataReader.
+func NewEncodedDataReader(data []byte) *EncodedDataReader {
+	return &EncodedDataReader{
+		data: data,
+	}
+}
+
+func (e *EncodedDataReader) Read(offset uint64) (doc.EncodedDocument, error) {
+	if offset >= uint64(len(e.data)) {
+		return doc.EncodedDocument{}, fmt.Errorf(
+			"invalid offset: %v is past the end of the data file", offset,
+		)
+	}
+
+	return doc.EncodedDocument{
+		Bytes: e.data[int(offset):],
+	}, nil
+}
+
 type EncodedDocumentReader struct {
 	currFields []doc.Field
 }

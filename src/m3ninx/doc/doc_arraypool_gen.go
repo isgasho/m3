@@ -61,6 +61,8 @@ type DocumentArrayPool interface {
 	Put(elems []Document)
 }
 
+// TODO(nate): EncodedDocumentArrayPool
+
 type DocumentFinalizeFn func([]Document) []Document
 
 type DocumentArrayPoolOpts struct {
